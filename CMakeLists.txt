@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(serial)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+add_compile_options(-Wall -Wextra -Wpedantic)
+
 find_package(ament_cmake REQUIRED)
 
 ament_export_include_directories(include)
@@ -9,6 +13,7 @@ ament_export_libraries(${PROJECT_NAME})
 ## Sources
 ## Add serial library
 add_library(${PROJECT_NAME}
+    SHARED
     src/serial.cc
     include/serial/serial.h
     include/serial/v8stdint.h
@@ -51,6 +56,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE include)
 install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib
 )
 
 ## Install headers
